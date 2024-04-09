@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import { AdminRouter } from "./app/modules/admin/admin.routes";
+import { UserRouter } from "./app/modules/user/user.routes";
 const app: Application = express();
 
 // Parser
@@ -10,5 +11,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/admin", AdminRouter);
+
+app.use("/user", UserRouter);
 
 export default app;
