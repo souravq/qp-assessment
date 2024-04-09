@@ -18,6 +18,7 @@ const viewExistingGroceryItems = async () => {
 
 // Remove grocery items from the system
 const removeGroceryItems = async (groceryId: string) => {
+  // Check Grocery Item is Exist or Not
   await prisma.groceryItem.findUniqueOrThrow({
     where: {
       id: groceryId,
@@ -31,8 +32,26 @@ const removeGroceryItems = async (groceryId: string) => {
   return result;
 };
 
+// Update details (e.g., name, price) of existing grocery items
+const updateGroceryItem = async (groceryId: string, payload: any) => {
+  // Check Grocery Item is Exist or Not
+  await prisma.groceryItem.findUniqueOrThrow({
+    where: {
+      id: groceryId,
+    },
+  });
+  const result = await prisma.groceryItem.update({
+    where: {
+      id: groceryId,
+    },
+    data: payload,
+  });
+  return result;
+};
+
 export const AdminService = {
   addNewGroceryItems,
   viewExistingGroceryItems,
   removeGroceryItems,
+  updateGroceryItem,
 };

@@ -8,5 +8,7 @@ router.post("/grocery-items", AdminController.addNewGroceryItems);
 router.get("/grocery-items", AdminController.viewExistingGroceryItems);
 // Remove grocery items from the system
 router.delete("/grocery-items/:id", AdminController.removeGroceryItems);
+// Update details (e.g., name, price) of existing grocery items
+router.patch("/grocery-items/:id", AdminController.updateGroceryItem);
 
 export const AdminRouter = router;

@@ -63,8 +63,31 @@ const removeGroceryItems = async (req: Request, res: Response) => {
   }
 };
 
+// Update details (e.g., name, price) of existing grocery items
+const updateGroceryItem = async (req: Request, res: Response) => {
+  try {
+    const groceryId = req.params.id;
+    const payload = req.body;
+    const result = await AdminService.updateGroceryItem(groceryId, payload);
+    res.status(StatusCodes.OK).json({
+      status: true,
+      statusCode: StatusCodes.OK,
+      message: "Grocery Item Updated Successfully",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(StatusCodes.NOT_FOUND).json({
+      status: false,
+      statusCode: StatusCodes.NOT_FOUND,
+      message: err.message || "Something Went Wrong",
+      data: err,
+    });
+  }
+};
+
 export const AdminController = {
   addNewGroceryItems,
   viewExistingGroceryItems,
   removeGroceryItems,
+  updateGroceryItem,
 };
