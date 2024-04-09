@@ -16,7 +16,9 @@
     "typescript": "^5.4.4"
   },
   "dependencies": {
+    "@prisma/client": "^5.12.1",
     "express": "^4.19.2",
+    "http-status-codes": "^2.3.0",
     "ts-node-dev": "^2.0.0"
   }
 }

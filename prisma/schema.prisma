@@ -12,3 +12,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// Creating GroceryItem Model
+model GroceryItem{
+  id String @id @default(uuid())
+  name String
+  price Int
+  quantity Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
