@@ -22,6 +22,27 @@ const addNewGroceryItems = async (req: Request, res: Response) => {
   }
 };
 
+//View existing grocery items
+const viewExistingGroceryItems = async (req: Request, res: Response) => {
+  try {
+    const result = await AdminService.viewExistingGroceryItems();
+    res.status(StatusCodes.OK).json({
+      status: true,
+      statusCode: StatusCodes.OK,
+      message: "All Grocery Item Fetched Successfully",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(StatusCodes.NOT_FOUND).json({
+      status: false,
+      statusCode: StatusCodes.NOT_FOUND,
+      message: err.message || "Something Went Wrong",
+      data: err,
+    });
+  }
+};
+
 export const AdminController = {
   addNewGroceryItems,
+  viewExistingGroceryItems,
 };

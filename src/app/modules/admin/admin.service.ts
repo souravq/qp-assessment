@@ -10,6 +10,13 @@ const addNewGroceryItems = async (payload: any) => {
   return result;
 };
 
+//View existing grocery items
+const viewExistingGroceryItems = async () => {
+  const result = await prisma.groceryItem.findMany();
+  return result;
+};
+
 export const AdminService = {
   addNewGroceryItems,
+  viewExistingGroceryItems,
 };
