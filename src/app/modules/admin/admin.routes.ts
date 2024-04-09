@@ -2,8 +2,11 @@ import express from "express";
 import { AdminController } from "./admin.controller";
 const router = express.Router();
 
+// Add new grocery items to the system
 router.post("/grocery-items", AdminController.addNewGroceryItems);
-//View existing grocery items
+// View existing grocery items
 router.get("/grocery-items", AdminController.viewExistingGroceryItems);
+// Remove grocery items from the system
+router.delete("/grocery-items/:id", AdminController.removeGroceryItems);
 
 export const AdminRouter = router;
