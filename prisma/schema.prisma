@@ -13,12 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Creating GroceryItem Model
-model GroceryItem{
-  id String @id @default(uuid())
-  name String
-  price Int
-  quantity Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Order {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  userId      String      // Assuming a user ID is associated with each order
+  items       OrderItem[] // Define the relation to OrderItem model
 }
+
+model OrderItem {
+  id             String   @id @default(uuid())
+  orderId        String
+  groceryItemId String   // Foreign key to GroceryItem model
+  quantity       Int
+  groceryItem    GroceryItem @relation(fields: [groceryItemId], references: [id]) // Define the relation to GroceryItem model
+  order          Order       @relation(fields: [orderId], references: [id]) // Define the opposite relation to Order model
+}
+
+model GroceryItem {
+  id        String    @id @default(uuid())
+  name      String
+  price     Float
+  quantity  Int
+  orders    OrderItem[] // Define the opposite relation to OrderItem model
+}
+
