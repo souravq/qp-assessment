@@ -10,5 +10,10 @@ router.get("/grocery-items", AdminController.viewExistingGroceryItems);
 router.delete("/grocery-items/:id", AdminController.removeGroceryItems);
 // Update details (e.g., name, price) of existing grocery items
 router.patch("/grocery-items/:id", AdminController.updateGroceryItem);
+// Manage inventory levels of grocery items
+router.patch(
+  "/grocery-items/:id/manage-inventory",
+  AdminController.manageGroceryItemsInventory
+);
 
 export const AdminRouter = router;
