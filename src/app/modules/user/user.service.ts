@@ -12,7 +12,7 @@ const viewAvailableGroceryItems = async () => {
 const multipleGroceryItemsOrder = async (payload: any) => {
   try {
     const orderItems = payload.items;
-
+    // Dummy UserId
     const userId: string = "10";
 
     // Validate order items and check if they are available in inventory

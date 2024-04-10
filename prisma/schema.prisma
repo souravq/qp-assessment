@@ -23,7 +23,7 @@ model Order {
 model OrderItem {
   id             String   @id @default(uuid())
   orderId        String
-  groceryItemId String   // Foreign key to GroceryItem model
+  groceryItemId  String   // Foreign key to GroceryItem model
   quantity       Int
   groceryItem    GroceryItem @relation(fields: [groceryItemId], references: [id]) // Define the relation to GroceryItem model
   order          Order       @relation(fields: [orderId], references: [id]) // Define the opposite relation to Order model
