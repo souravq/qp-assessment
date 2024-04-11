@@ -1,12 +1,23 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { AdminController } from "./admin.controller";
 import { AuthGrard } from "../../middlewares/auth";
+import { AdminZodValidation } from "./admin.validation";
 const router = express.Router();
 
 // Add new grocery items to the system
 router.post(
   "/grocery-items",
   AuthGrard.isAdmin,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await AdminZodValidation.addGroceryItemsZodValidation.parseAsync({
+        body: req.body,
+      });
+      next();
+    } catch (err) {
+      next(err);
+    }
+  },
   AdminController.addNewGroceryItems
 );
 // View existing grocery items
