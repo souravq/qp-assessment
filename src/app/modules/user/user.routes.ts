@@ -1,6 +1,7 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { UserController } from "./user.controller";
 import { AuthGrard } from "../../middlewares/auth";
+import { UserZodValidation } from "./user.validation";
 const router = express.Router();
 
 // View the list of available grocery items
@@ -14,6 +15,14 @@ router.get(
 router.post(
   "/orders",
   AuthGrard.isUser,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await UserZodValidation.OrderSchema.parseAsync(req.body);
+      next();
+    } catch (err) {
+      next(err);
+    }
+  },
   UserController.multipleGroceryItemsOrder
 );
 
